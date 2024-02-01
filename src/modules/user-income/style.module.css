@@ -1,0 +1,64 @@
+/* main */
+
+.totalBlock{
+    @apply flex flex-col md:flex-row gap-8 md:gap-16 justify-between items-center pt-14
+}
+
+/* main finish */
+
+/* calendar */
+
+.calendarBlock{
+    @apply flex flex-col justify-center lg:flex-row lg:justify-between gap-10 sm:gap-20
+}
+
+.caledarDayName{
+    @apply border-calendar border-gray-400 bg-gray-100 text-gray-600 flex justify-center select-none cursor-pointer items-center p-2
+}
+
+.calendarDate{
+    @apply border-calendar border-gray-400 flex justify-center select-none cursor-pointer hover:bg-gray-200 items-center p-2
+}
+
+/* calendar finish */
+
+/* date */
+.container{
+    @apply flex flex-col pb-14
+}
+
+.title{
+    @apply text-center text-2xl sm:text-3xl font-bold
+}
+
+.dateBlock{
+    @apply flex gap-4 items-center flex-wrap
+}
+
+.description{
+    @apply text-xl p-1 border-0 focus:outline-0 border-b-2 border-gray-400
+}
+
+.price{
+    @apply text-xl w-20 p-1 border-0 focus:outline-0 border-b-2 border-gray-400
+}
+
+.btn{
+    @apply flex justify-center items-center text-lg gap-2 py-1 px-2 border-2 rounded-lg select-none
+}
+/* date finish  */
+
+
+/* switch */
+.switchCont{
+    @apply flex gap-5 items-center
+}
+
+.switchBlock{
+    @apply cursor-pointer w-16 h-6 outline outline-2 relative items-center rounded-xl  outline-black
+}
+
+.switchCircle{
+    @apply h-5 w-5 rounded-full bg-oBut absolute top-0.5 duration-500 right-0.5
+}
+/* switch finish */

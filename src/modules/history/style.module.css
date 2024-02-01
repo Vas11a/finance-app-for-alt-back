@@ -1,0 +1,15 @@
+.clearBtn{
+    @apply text-xl mt-4 cursor-pointer px-2 py-1 border-2 rounded-lg w-fit border-oBut
+}
+
+.date{
+    @apply text-xl font-bold text-gray-500
+}
+
+.main{
+    @apply h-full flex flex-col gap-5
+}
+
+.historyBlock{
+    @apply flex items-center gap-3 sm:gap-10 pb-2 flex-wrap
+}

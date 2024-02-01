@@ -1,0 +1,108 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+*{
+    font-family: 'Manrope', sans-serif;
+    -webkit-tap-highlight-color: transparent;
+}
+
+input{
+    border: 1px solid black;
+}
+
+body{
+    background-color: #FFC9AF;
+}
+
+.wrapper{
+    width: 100%;
+    margin: 0 auto;
+    max-width: 2100px;
+}
+
+/* ////////////////////////////// */
+/* welcome page */
+/* ///////////////////////////// */
+
+.welcome-cont{
+    width: 100%;
+    padding: 18px;
+    background-color: #FFC9AF;
+}
+
+@media screen and (max-width:640px){
+    .welcome-cont{padding: 10px;}
+}
+
+
+.welcome-cont-white{
+    height: auto;
+    min-height: calc(100vh - 36px);
+    padding-bottom: 20px !important;
+    @apply bg-white rounded-lg p-5 sm:p-8 md:p-28 flex flex-col justify-between gap-20 md:gap-36 lg:gap-10 lg:flex-row
+}
+
+
+
+.welcome-title{
+    @apply text-5xl md:text-7xl font-thin
+}
+
+.welcome-title2{
+    @apply text-5xl md:text-7xl text-center font-semibold text-oBut
+}
+
+.welcome-subtitle{
+    @apply text-xl sm:text-2xl md:text-3xl text-center sm:text-left pt-10 sm:pt-20
+}
+
+.form-container{
+    @apply flex-1 flex justify-center lg:justify-end
+}
+
+/* ////////////////////////////// */
+/* welcome page FINISH */
+/* ///////////////////////////// */
+
+
+/* //////////////////////////// */
+/* Uer page */
+/* //////////////////////////// */
+
+.user-cont-white{
+    height: auto;
+    min-height: calc(100vh - 36px);
+    padding-bottom: 70px !important;
+    @apply bg-white rounded-lg p-4 sm:p-8 relative
+}
+
+.user-modules-cont{
+    @apply border-gray-300 mt-10 border-t-4 border-b-4
+}
+
+.user-name{
+    @apply text-4xl text-oBut font-bold
+}
+
+.user-modules{
+    @apply overflow-hidden py-3 sm:p-7
+}
+
+.user-error{
+    @apply text-center text-red-600 font-bold text-lg mt-5 -mb-5
+}
+
+.animation{
+    animation: change;
+    animation-duration: 1s;
+}
+
+@media screen and (max-width:640px){
+    .gh{left: calc(50% - 50px);}
+}
+
+/* //////////////////////////// */
+/* Uer page FINISH */
+/* //////////////////////////// */

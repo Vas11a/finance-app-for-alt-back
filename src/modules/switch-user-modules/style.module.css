@@ -1,0 +1,8 @@
+.switchcontainer{
+    @apply flex justify-center mt-10
+}
+
+.switchElement{
+    @apply border-2 border-oBut px-3 py-2 duration-500 text-lg cursor-pointer 
+}
+

@@ -1,0 +1,32 @@
+.button{
+    @apply flex justify-center rounded-xl text-white text-lg items-center px-2 h-11  bg-oBut cursor-pointer duration-500
+}
+
+.button:hover{
+    @apply bg-oBg
+}
+
+
+.buttonDelete{
+    @apply flex justify-center rounded-xl text-white text-lg items-center px-2 h-11 bg-red-600 cursor-pointer duration-500
+}
+
+.buttonDelete:hover{
+    @apply bg-red-400
+}
+
+.settingsForm{
+    @apply duration-500 flex flex-col items-center overflow-hidden
+}
+
+.imgEye{
+    @apply absolute right-2 cursor-pointer h-5 w-auto
+}
+
+.formInput{
+    @apply p-2 border-black rounded-xl text-lg select-none
+}
+
+.buttonsBlock{
+    @apply flex justify-center flex-wrap gap-5 sm:gap-10
+}

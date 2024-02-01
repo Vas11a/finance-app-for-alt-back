@@ -1,0 +1,30 @@
+.singinLogo{
+    @apply font-thin text-center lg:text-left text-4xl md:text-5xl pb-0 sm:pb-8
+}
+
+.forgotPass{
+    @apply font-semibold text-oBut pt-4 cursor-pointer block
+}
+
+.reg1{
+    @apply text-lg pt-4 text-center
+}
+
+.reg2{
+    @apply cursor-pointer text-oBut font-semibold
+}
+
+.spinnerCont{
+    position: relative;
+}
+
+.spinner{
+    position: absolute;
+    top: 50px;
+    left: calc(50% - 16px);
+    @apply top-7 lg:top-12
+}
+
+.error{
+    @apply text-red-600 text-center font-bold pt-4 -mb-5
+}

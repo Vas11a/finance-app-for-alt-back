@@ -1,0 +1,33 @@
+.container{
+    @apply max-w-form w-full bg-white p-5 sm:p-8 rounded-3xl -mt-5
+}
+
+.singinLogo{
+    @apply font-thin text-center lg:text-left text-4xl md:text-5xl 
+}
+
+.forgotPass{
+    @apply font-semibold text-oBut pt-4 cursor-pointer
+}
+
+.reg1{
+    @apply text-lg pt-4 text-center
+}
+
+.reg2{
+    @apply cursor-pointer text-oBut font-semibold
+}
+
+.spinnerCont{
+    position: relative;
+}
+
+.spinner{
+    position: absolute;
+    top: 15px;
+    left: calc(50% - 16px);
+}
+
+.error{
+    @apply text-red-600 text-center font-bold pt-4 -mb-5
+}
