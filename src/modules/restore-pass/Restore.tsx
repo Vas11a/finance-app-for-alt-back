@@ -12,13 +12,16 @@ import { isValidEmail } from 'helpers';
 
 type RestoreModuleType = {
     setUserCode: (value: string) => void;
+    emailLocal: string;
+    passwordLocal: string;
+    repeatPassword: string;
+    setEmailLocal: (value: string) => void;
+    setPasswordLocal: (value: string) => void;
+    setRepeatPassword: (value: string) => void;
 }
 
-function Restore({ setUserCode }: RestoreModuleType): JSX.Element {
+function Restore({ setUserCode, emailLocal, passwordLocal, repeatPassword, setEmailLocal, setPasswordLocal, setRepeatPassword }: RestoreModuleType): JSX.Element {
 
-    const [emailLocal, setEmailLocal] = React.useState<string>('');
-    const [passwordLocal, setPasswordLocal] = React.useState<string>('');
-    const [repeatPassword, setRepeatPassword] = React.useState<string>('');
 
     const [isLoading, setIsLoading] = React.useState<boolean>(false);
     const [isError, setIsError] = React.useState<boolean>(false);

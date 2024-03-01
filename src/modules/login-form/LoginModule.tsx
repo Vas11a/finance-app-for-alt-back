@@ -13,6 +13,7 @@ import { setCalendar, setOtherState } from '@slices/userPageSlice';
 import { useAppDispatch } from 'hooks';
 import { useNavigate, Link } from 'react-router-dom';
 import { isValidEmail } from 'helpers';
+import { log } from 'console';
 
 function LoginModule({ isLoginPage }: { isLoginPage?: boolean }): JSX.Element {
 
@@ -27,12 +28,12 @@ function LoginModule({ isLoginPage }: { isLoginPage?: boolean }): JSX.Element {
 
     const navigate = useNavigate();
 
-    React.useEffect(() => {
-        if (localStorage.getItem('token')) {
+    // React.useEffect(() => {
+    //     if (localStorage.getItem('token')) {
             
-            getAutorUser()
-        }
-    }, [])
+    //         getAutorUser()
+    //     }
+    // }, [])
 
     const getAutorUser = async () => {
         setIsLoading(true)
@@ -48,7 +49,7 @@ function LoginModule({ isLoginPage }: { isLoginPage?: boolean }): JSX.Element {
             dispatch(setCalendar(res.data.calendar))
             dispatch(setOtherState([res.data.globalTotal, res.data.weekTotal, res.data.isMonthly]))
             
-            dispatch(setHistory(res.data.userHistory))
+            // dispatch(setHistory(res.data.userHistory))
             navigate('/user-pannel')
             setIsLoading(false);
         } catch (error) {
@@ -66,15 +67,17 @@ function LoginModule({ isLoginPage }: { isLoginPage?: boolean }): JSX.Element {
         setIsError(false)
         try {
             const res = await axios.post(`${mainUrl}login`, { email: emailLocal, password: passwordLocal });
+            console.log(res.data);
+            
             dispatch(setUserData({
                 email: res.data.email,
                 username: res.data.username,
-                userId: res.data._id,
+                userId: res.data.id,
                 password: res.data.password
             }))
             dispatch(setCalendar(res.data.calendar))
             dispatch(setOtherState([res.data.globalTotal, res.data.weekTotal, res.data.isMonthly]))
-            dispatch(setHistory(res.data.userHistory))
+            // dispatch(setHistory(res.data.userHistory))
             localStorage.setItem('token', res.data._id);
             navigate('/user-pannel')
             setEmailLocal('');

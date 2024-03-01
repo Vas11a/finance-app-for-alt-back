@@ -26,7 +26,7 @@ export default function UserIncome({ setIsLoading, setErrorText, setIsError }: U
   const dispatch = useAppDispatch()
   const [activeDay, setActiveDay] = React.useState<number>(34)
   const { calendar, globalTotal, weekTotal, isMonthly, indicate } = useAppSelector(state => state.userPage)
-  const { userId } = useAppSelector(state => state.profile)
+  const { userId, email } = useAppSelector(state => state.profile)
   const [mounted, setMounted] = React.useState(false);
 
   React.useEffect(() => {
@@ -55,8 +55,9 @@ export default function UserIncome({ setIsLoading, setErrorText, setIsError }: U
     setIsLoading(true)
     setIsError(false)
     try {
-      await axios.post(`${mainUrl}saveData`, { data: calendar, userId: userId })
-
+      console.log({ calendar: calendar, userId: userId });
+      
+      await axios.post(`${mainUrl}updateCalendar`, { calendar: calendar, userId: userId })
       setIsLoading(false)
       setIsError(false)
     } catch (error) {
@@ -67,7 +68,7 @@ export default function UserIncome({ setIsLoading, setErrorText, setIsError }: U
   }
 
   const addToHistory = async () => {
-    const res = setHistoryObj(globalTotal, weekTotal, isMonthly, `${calendar[0].fullData} - ${calendar[calendar.length - 1].fullData}`, `${calendar[28].fullData} - ${calendar[calendar.length - 1].fullData}`)
+    const res = setHistoryObj(globalTotal, weekTotal, isMonthly, `${calendar[0].fullDate} - ${calendar[calendar.length - 1].fullDate}`, `${calendar[28].fullDate} - ${calendar[calendar.length - 1].fullDate}`)
     setIsLoading(true)
     setIsError(false)
     try {
@@ -105,3 +106,10 @@ export default function UserIncome({ setIsLoading, setErrorText, setIsError }: U
     </div>
   )
 }
+
+
+
+
+
+
+

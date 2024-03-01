@@ -5,14 +5,14 @@ export interface profileState {
   username: string
   email: string
   password: string
-  userId: string
+  userId: number
 }
 
 const initialState: profileState = {
   username: '',
   email: '',
   password: '',
-  userId: ''
+  userId: 0
 }
 
 export const profileSlice = createSlice({

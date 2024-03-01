@@ -12,13 +12,17 @@ import { isValidEmail } from 'helpers';
 
 type RegistrationModuleType = {
     setUserCode: (value: string) => void;
+    emailLocal: string;
+    passwordLocal: string;
+    userName: string;
+    setEmailLocal: (value: string) => void;
+    setPasswordLocal: (value: string) => void;
+    setUserName: (value: string) => void;
 }
 
-function RegistrationModule({ setUserCode }: RegistrationModuleType): JSX.Element {
+function RegistrationModule({ setUserCode, emailLocal, passwordLocal, userName, setEmailLocal, setPasswordLocal, setUserName }: RegistrationModuleType): JSX.Element {
 
-    const [emailLocal, setEmailLocal] = React.useState<string>('');
-  const [passwordLocal, setPasswordLocal] = React.useState<string>('');
-  const [userName, setUserName] = React.useState<string>('');
+    
 
     const [isLoading, setIsLoading] = React.useState<boolean>(false);
     const [isError, setIsError] = React.useState<boolean>(false);
@@ -33,7 +37,7 @@ function RegistrationModule({ setUserCode }: RegistrationModuleType): JSX.Elemen
         setIsLoading(true)
         setIsError(false)
         try {
-            const res = await axios.post(`${mainUrl}sendEmail`, { username: userName, email: emailLocal, password: passwordLocal });
+            const res = await axios.post(`${mainUrl}sendEmail`, { email: emailLocal });
             if (res.status === 204) {
                 setErrorText('You already have account');
                 setIsError(true);

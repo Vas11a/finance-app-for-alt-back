@@ -6,7 +6,7 @@ interface Message {
 
 export interface CalendarItem {
     date: number;
-    fullData: string;
+    fullDate: string;
     total: number;
     messages: Message[];
 }

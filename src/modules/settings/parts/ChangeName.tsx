@@ -19,10 +19,13 @@ export default function ChangeName({ setIsLoading, setErrorText, setIsError ,set
   const dispatch = useAppDispatch()
   const { userId } = useAppSelector(state => state.profile)
   const sendHandler = async () => {
+    
     setIsLoading(true)
     setIsError(false)
     try {
-      await axios.post(`${mainUrl}changeName`, { userId: userId, name: newName })
+      console.log({ id: +userId, username: newName });
+      
+      await axios.post(`${mainUrl}changeName`, { id: +userId, username: newName })
       dispatch(setUserName(newName))
       setIsLoading(false)
       setNewName('')

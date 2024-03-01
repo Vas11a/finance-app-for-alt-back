@@ -9,12 +9,15 @@ function RegistrationPage(): JSX.Element {
 
   const [userCode, setUserCode] = React.useState<string>('');
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
+  const [emailLocal, setEmailLocal] = React.useState<string>('');
+  const [passwordLocal, setPasswordLocal] = React.useState<string>('');
+  const [userName, setUserName] = React.useState<string>('');
   const navigate = useNavigate();
 
   const confirm = async () => {
     setIsLoading(true)
     try {
-      await axios.post(`${mainUrl}createUser`);
+      await axios.post(`${mainUrl}createUser`, { email: emailLocal, password: passwordLocal, username: userName });
       setIsLoading(false)
       navigate('/login');
     } catch (error) {
@@ -30,6 +33,13 @@ function RegistrationPage(): JSX.Element {
         {
           userCode === '' ? (
             <RegistrationModule 
+              setEmailLocal={setEmailLocal}
+              setPasswordLocal={setPasswordLocal}
+              setUserName={setUserName}
+              emailLocal={emailLocal}
+              passwordLocal={passwordLocal}
+              userName={userName}
+
               setUserCode={setUserCode}
             />
           ) : (

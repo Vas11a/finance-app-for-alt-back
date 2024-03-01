@@ -7,6 +7,10 @@ import Confirm from 'modules/confirm-mail/Confirm';
 
 function ResetPass(): JSX.Element {
 
+  const [emailLocal, setEmailLocal] = React.useState<string>('');
+  const [passwordLocal, setPasswordLocal] = React.useState<string>('');
+  const [repeatPassword, setRepeatPassword] = React.useState<string>('');
+
   const [userCode, setUserCode] = React.useState<string>('');
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
   const navigate = useNavigate();
@@ -14,7 +18,10 @@ function ResetPass(): JSX.Element {
   const confirm = async () => {
     setIsLoading(true)
     try {
-      await axios.post(`${mainUrl}savePassword`);
+      await axios.post(`${mainUrl}savePassword`, {
+        email: emailLocal,
+        password: passwordLocal
+      });
       setIsLoading(false)
       alert('Password changed');
     } catch (error) {
@@ -29,7 +36,14 @@ function ResetPass(): JSX.Element {
 
         {
           userCode === '' ? (
-            <Restore setUserCode={setUserCode}/>
+            <Restore setUserCode={setUserCode}
+              emailLocal={emailLocal}
+              setEmailLocal={setEmailLocal}
+              passwordLocal={passwordLocal}
+              setPasswordLocal={setPasswordLocal}
+              repeatPassword={repeatPassword}
+              setRepeatPassword={setRepeatPassword}
+            />
           ) : (
             <Confirm confirm={confirm} isLoading={isLoading} code={userCode} setCode={setUserCode} />
           )

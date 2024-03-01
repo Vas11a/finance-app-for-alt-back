@@ -16,7 +16,7 @@ export default function UserPage(): JSX.Element {
   const navigate = useNavigate();
 
   React.useEffect(()=> {
-      if (userId === '') {
+      if (userId === 0) {
           navigate('/')
       }
   }, [])
@@ -58,7 +58,7 @@ export default function UserPage(): JSX.Element {
           </div>
 
           <div className=" absolute flex gap-5 bottom-3 gh ">
-            <a href="https://github.com/Vas11a/financeapp" target='blanc'><img title='Frontend Part' className=' w-10 h-auto' src={gh} alt="gh-front" /></a>
+            <a href="https://github.com/Vas11a/finance-app-for-alt-back" target='blanc'><img title='Frontend Part' className=' w-10 h-auto' src={gh} alt="gh-front" /></a>
             <a href="https://github.com/KOSTIAAANTYN/financeapp" target='blanc'><img title='Backend Part' className=' w-10 h-auto' src={gh} alt="gh-back" /></a>
           </div>
         </div>
