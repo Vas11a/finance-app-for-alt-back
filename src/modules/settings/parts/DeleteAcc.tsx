@@ -3,10 +3,9 @@ import s from '../style.module.css'
 import Button from 'components/Button'
 import { useAppSelector } from 'hooks'
 import { useNavigate } from 'react-router-dom'
-import axios from 'axios'
+import SettingsService from '@service/SettingsService'
 import eye from '@imgs/eye-visib.svg'
 import eyeNo from '@imgs/eye-no-visib.svg'
-import { mainUrl } from 'urls'
 
 type DeleteAccType = {
     settingsForm: number
@@ -30,14 +29,15 @@ export default function DeleteAcc({setIsLoading, setErrorText, setIsError, setti
         }
         setIsLoading(true)
         try {
-            await axios.post(`${mainUrl}deleteAccount`, { id: +userId })
-            setIsLoading(false)
+            const res = await SettingsService.deleteAccount(+userId)
+            console.log(res.data);
             // localStorage.removeItem('token')
             navigate('/')
         } catch (error) {
-            setIsLoading(false)
             setErrorText('Server error')
             setIsError(false)
+        } finally {
+            setIsLoading(false)
         }
     }
 

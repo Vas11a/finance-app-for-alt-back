@@ -1,7 +1,6 @@
 import React from 'react'
 import s from './style.module.css'
-import axios from 'axios';
-import { mainUrl } from 'urls';
+import AuthService from '@service/AuthService';
 import FormInput from 'components/FormInput';
 import FormBtn from 'components/FormBtn';
 import eyeVisib from '@imgs/eye-visib.svg'
@@ -41,20 +40,19 @@ function Restore({ setUserCode, emailLocal, passwordLocal, repeatPassword, setEm
         setIsLoading(true)
         setIsError(false)
         try {
-            const res = await axios.post(`${mainUrl}changePassword`, { email: emailLocal, password: passwordLocal });
+            const res = await AuthService.changePass(emailLocal, passwordLocal);
             setUserCode(res.data)
-            setIsLoading(false)
         } catch (error: any) {
             if (error.response && error.response.status === 404) {
                 setErrorText('You do not have an account');
                 setIsError(true);
-                setIsLoading(false)
             } else {
                 console.log(error)
                 setErrorText('Server error');
                 setIsError(true);
-                setIsLoading(false)
             }
+        } finally {
+            setIsLoading(false)
         }
     }
 

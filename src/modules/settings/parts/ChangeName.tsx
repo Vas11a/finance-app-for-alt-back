@@ -3,8 +3,7 @@ import s from '../style.module.css'
 import Button from 'components/Button'
 import { useAppSelector, useAppDispatch } from 'hooks'
 import { setUserName } from '@slices/profileSlice'
-import axios from 'axios'
-import { mainUrl } from 'urls'
+import SettingsService from '@service/SettingsService'
 
 type ChangeNameType = {
     settingsForm: number;
@@ -19,20 +18,20 @@ export default function ChangeName({ setIsLoading, setErrorText, setIsError ,set
   const dispatch = useAppDispatch()
   const { userId } = useAppSelector(state => state.profile)
   const sendHandler = async () => {
-    
     setIsLoading(true)
     setIsError(false)
     try {
       console.log({ id: +userId, username: newName });
+      const res = await SettingsService.changeUserName(+userId, newName)
+      console.log(res.data);
       
-      await axios.post(`${mainUrl}changeName`, { id: +userId, username: newName })
       dispatch(setUserName(newName))
-      setIsLoading(false)
       setNewName('')
     } catch (error) {
       console.log(error);
       setErrorText('Server error')
       setIsError(true)
+    } finally {
       setIsLoading(false)
     }
     

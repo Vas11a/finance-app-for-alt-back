@@ -10,9 +10,8 @@ import { CategoryScale } from "chart.js";
 import { useAppSelector, useAppDispatch } from 'hooks'
 import { addHistory } from '@slices/userHistorySlice'
 import { setIndicator } from '@slices/userPageSlice'
-import axios from 'axios'
+import MainService from '@service/MainService'
 import { setHistoryObj } from './helpers'
-import { mainUrl } from 'urls'
 Chart.register(CategoryScale);
 
 type UserIncomeType = {
@@ -57,28 +56,29 @@ export default function UserIncome({ setIsLoading, setErrorText, setIsError }: U
     try {
       console.log({ calendar: calendar, userId: userId });
       
-      await axios.post(`${mainUrl}updateCalendar`, { calendar: calendar, userId: userId })
-      setIsLoading(false)
+      const res = await MainService.updateCalendar(calendar, userId)
+      console.log(res.data)
       setIsError(false)
     } catch (error) {
       setErrorText('Server error')
       setIsError(true)
+    } finally {
       setIsLoading(false)
     }
   }
 
   const addToHistory = async () => {
-    const res = setHistoryObj(globalTotal, weekTotal, isMonthly, `${calendar[0].fullDate} - ${calendar[calendar.length - 1].fullDate}`, `${calendar[28].fullDate} - ${calendar[calendar.length - 1].fullDate}`)
+    const resFc = setHistoryObj(globalTotal, weekTotal, isMonthly, `${calendar[0].fullDate} - ${calendar[calendar.length - 1].fullDate}`, `${calendar[28].fullDate} - ${calendar[calendar.length - 1].fullDate}`)
     setIsLoading(true)
     setIsError(false)
     try {
-      await axios.post(`${mainUrl}addToHistory`, { data: res, userId: userId })
+      const res = await MainService.addElemToHistory(resFc, userId)
       dispatch(addHistory(res))
-      setIsLoading(false)
     } catch (error) {
-      setIsLoading(false)
       setErrorText('Server error')
       setIsError(true)
+    } finally {
+      setIsLoading(false)
     }
   }
 

@@ -4,8 +4,7 @@ import s from './style.module.css'
 import Button from 'components/Button'
 import { useAppSelector, useAppDispatch } from 'hooks'
 import { setHistory, removeHistory } from '@slices/userHistorySlice'
-import { mainUrl } from 'urls'
-import axios from 'axios'
+import MainService from '@service/MainService'
 
 type HistoryType = {
   setIsLoading: (value: boolean) => void
@@ -23,13 +22,14 @@ export default function History({ setIsLoading, setErrorText, setIsError }: Hist
     setIsLoading(true)
     setIsError(false)
     try {
-      await axios.post(`${mainUrl}clearHistory`, { userId: userId })
-      setIsLoading(false)
+      const res = await MainService.clearHistory(userId)
+      console.log(res.data)
       dispatch(setHistory([]))
     } catch (error) {
-      setIsLoading(false)
       setErrorText('Server error')
       setIsError(true)
+    } finally {
+      setIsLoading(false)
     }
   }
 
@@ -39,13 +39,14 @@ export default function History({ setIsLoading, setErrorText, setIsError }: Hist
     try {
       let sendHistory = JSON.parse(JSON.stringify(history))
       sendHistory.splice(idx, 1)
-      await axios.post(`${mainUrl}removeOneHistoryElem`, { userId: userId, data: sendHistory })
-      setIsLoading(false)
+      const res = await MainService.removeOneHistoryElem(userId, sendHistory)
+      console.log(res.data)
       dispatch(removeHistory(idx))
     } catch (error) {
-      setIsLoading(false)
       setErrorText('Server error')
       setIsError(true)
+    } finally {
+      setIsLoading(false)
     }
   }
 

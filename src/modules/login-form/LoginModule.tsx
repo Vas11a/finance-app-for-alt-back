@@ -1,7 +1,5 @@
 import React from 'react'
 import s from './style.module.css'
-import axios from 'axios';
-import { mainUrl } from 'urls';
 import FormInput from 'components/FormInput';
 import FormBtn from 'components/FormBtn';
 import eyeVisib from '@imgs/eye-visib.svg';
@@ -13,7 +11,7 @@ import { setCalendar, setOtherState } from '@slices/userPageSlice';
 import { useAppDispatch } from 'hooks';
 import { useNavigate, Link } from 'react-router-dom';
 import { isValidEmail } from 'helpers';
-import { log } from 'console';
+import AuthService from '@service/AuthService';
 
 function LoginModule({ isLoginPage }: { isLoginPage?: boolean }): JSX.Element {
 
@@ -28,34 +26,6 @@ function LoginModule({ isLoginPage }: { isLoginPage?: boolean }): JSX.Element {
 
     const navigate = useNavigate();
 
-    // React.useEffect(() => {
-    //     if (localStorage.getItem('token')) {
-            
-    //         getAutorUser()
-    //     }
-    // }, [])
-
-    const getAutorUser = async () => {
-        setIsLoading(true)
-        setIsError(false)
-        try {
-            const res = await axios.post(`${mainUrl}getAutorUser`, { token: localStorage.getItem('token') });
-            dispatch(setUserData({
-                email: res.data.email,
-                username: res.data.username,
-                userId: res.data._id,
-                password: res.data.password
-            }))
-            dispatch(setCalendar(res.data.calendar))
-            dispatch(setOtherState([res.data.globalTotal, res.data.weekTotal, res.data.isMonthly]))
-            
-            // dispatch(setHistory(res.data.userHistory))
-            navigate('/user-pannel')
-            setIsLoading(false);
-        } catch (error) {
-            setIsLoading(false)
-        }
-    }
 
     const login = async () => {
         if (isValidEmail(emailLocal) === false) {
@@ -66,7 +36,7 @@ function LoginModule({ isLoginPage }: { isLoginPage?: boolean }): JSX.Element {
         setIsLoading(true)
         setIsError(false)
         try {
-            const res = await axios.post(`${mainUrl}login`, { email: emailLocal, password: passwordLocal });
+            const res = await AuthService.login(emailLocal, passwordLocal);
             console.log(res.data);
             
             dispatch(setUserData({
@@ -82,18 +52,16 @@ function LoginModule({ isLoginPage }: { isLoginPage?: boolean }): JSX.Element {
             navigate('/user-pannel')
             setEmailLocal('');
             setPasswordLocal('');
-            setIsLoading(false);
         } catch (error: any) {
             if (error.response && error.response.status === 404) {
                 setErrorText('Error login or password');
                 setIsError(true);
-                setIsLoading(false);
             } else {
                 setErrorText('Server error');
                 setIsError(true);
-                setIsLoading(false);
             }
-
+        } finally {
+            setIsLoading(false)
         }
     }
 

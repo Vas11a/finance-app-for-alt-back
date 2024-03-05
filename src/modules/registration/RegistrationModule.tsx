@@ -1,7 +1,5 @@
 import React from 'react'
 import s from './style.module.css'
-import axios from 'axios';
-import { mainUrl } from 'urls';
 import FormInput from 'components/FormInput';
 import FormBtn from 'components/FormBtn';
 import eyeVisib from '@imgs/eye-visib.svg'
@@ -9,6 +7,7 @@ import eyeNo from '@imgs/eye-no-visib.svg'
 import Spinner from 'components/Spinner';
 import { Link } from 'react-router-dom';
 import { isValidEmail } from 'helpers';
+import AuthService from '@service/AuthService';
 
 type RegistrationModuleType = {
     setUserCode: (value: string) => void;
@@ -37,19 +36,18 @@ function RegistrationModule({ setUserCode, emailLocal, passwordLocal, userName, 
         setIsLoading(true)
         setIsError(false)
         try {
-            const res = await axios.post(`${mainUrl}sendEmail`, { email: emailLocal });
+            const res = await AuthService.sendEmail(emailLocal);
             if (res.status === 204) {
                 setErrorText('You already have account');
                 setIsError(true);
-                setIsLoading(false)
             } else if(res.status === 200) {
                 setUserCode(res.data)
-                setIsLoading(false)
             }
         } catch (error) {
             console.log(error)
             setErrorText('Server error');
             setIsError(true);
+        } finally {
             setIsLoading(false)
         }
     }

@@ -1,8 +1,7 @@
 import React from 'react'
 import s from '../style.module.css'
 import Button from 'components/Button'
-import { mainUrl } from 'urls'
-import axios from 'axios'
+import SettingsService from '@service/SettingsService'
 
 type ContactsType = {
     settingsForm: number;
@@ -19,13 +18,14 @@ export default function Contacts({setIsLoading, setErrorText, setIsError, settin
         setIsLoading(true)
         setIsError(false)
         try {
-            await axios.post(`${mainUrl}contact`, { email: mail, question: question })
-            setIsLoading(false)
+            const res = await SettingsService.sendLetter(mail, question)
+            console.log(res.data)
             setMail('')
             setQuestion('')
         } catch (error) {
             setErrorText('Server error')
             setIsError(true)
+        } finally {
             setIsLoading(false)
         }
         

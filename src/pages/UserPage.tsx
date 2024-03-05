@@ -12,7 +12,7 @@ export default function UserPage(): JSX.Element {
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
   const [isError, setIsError] = React.useState<boolean>(false);
   const [errorText, setErrorText] = React.useState<string>('Server error');
-  const  {username, email, password, userId} = useAppSelector(state => state.profile);
+  const  {username, userId} = useAppSelector(state => state.profile);
   const navigate = useNavigate();
 
   React.useEffect(()=> {
@@ -27,8 +27,6 @@ export default function UserPage(): JSX.Element {
     setSelectedModule(value)
   }
 
-
-  
 
 
   return (

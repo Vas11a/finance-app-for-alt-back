@@ -26,6 +26,7 @@
       "@/*": ["./src/*"],
       "@slices/*": ["./store/slices/*"], 
       "@imgs/*": ["./assets/imgs/*"],
+      "@service/*": ["./service/*"],
     },
   },
   "include": [

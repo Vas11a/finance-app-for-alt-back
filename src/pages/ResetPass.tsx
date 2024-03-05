@@ -1,7 +1,6 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
-import { mainUrl } from 'urls';
-import axios from 'axios';
+import AuthService from '@service/AuthService';
 import Restore from 'modules/restore-pass/Restore';
 import Confirm from 'modules/confirm-mail/Confirm';
 
@@ -15,17 +14,15 @@ function ResetPass(): JSX.Element {
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
   const navigate = useNavigate();
 
-  const confirm = async () => {
+  const updatePassword = async () => {
     setIsLoading(true)
     try {
-      await axios.post(`${mainUrl}savePassword`, {
-        email: emailLocal,
-        password: passwordLocal
-      });
-      setIsLoading(false)
+      const res = await AuthService.updatePass(emailLocal, passwordLocal);
+      console.log(res.data);
       alert('Password changed');
     } catch (error) {
       alert('Server error');
+    } finally {
       setIsLoading(false)
     }
   }
@@ -45,7 +42,7 @@ function ResetPass(): JSX.Element {
               setRepeatPassword={setRepeatPassword}
             />
           ) : (
-            <Confirm confirm={confirm} isLoading={isLoading} code={userCode} setCode={setUserCode} />
+            <Confirm confirm={updatePassword} isLoading={isLoading} code={userCode} setCode={setUserCode} />
           )
         }
       </div>
