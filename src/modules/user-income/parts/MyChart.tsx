@@ -49,7 +49,7 @@ const MyChart = ({ calendar, globalTotal, isMonthly, weekTotal }: ChartTypes) =>
 
     return (
         <div className="w-full flex-1" > 
-            <Line height={300} data={data} options={options} />
+            <Line height={400} data={data} options={options} />
         </div>
     );
 };

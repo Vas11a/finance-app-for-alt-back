@@ -37,9 +37,7 @@ export default function History({ setIsLoading, setErrorText, setIsError }: Hist
     setIsLoading(true)
     setIsError(false)
     try {
-      let sendHistory = JSON.parse(JSON.stringify(history))
-      sendHistory.splice(idx, 1)
-      const res = await MainService.removeOneHistoryElem(userId, sendHistory)
+      const res = await MainService.removeOneHistoryElem(userId, idx)
       console.log(res.data)
       dispatch(removeHistory(idx))
     } catch (error) {

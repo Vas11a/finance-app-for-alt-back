@@ -55,10 +55,9 @@ export const userPageSlice = createSlice({
     setCalendar(state, actions: PayloadAction<CalendarItem[]>) {
       state.calendar = actions.payload
     },
-    setOtherState(state, actions: PayloadAction<[globalTotal: number, weekTotal: number, isMonthly: boolean]>) {
+    setOtherState(state, actions: PayloadAction<[globalTotal: number, weekTotal: number]>) {
       state.globalTotal = actions.payload[0]
       state.weekTotal = actions.payload[1]
-      state.isMonthly = actions.payload[2]
     },
     changeIsIncomeR(state, action: PayloadAction<[act: number, i: number]>) {
       const [activeIdx, idx] = action.payload;

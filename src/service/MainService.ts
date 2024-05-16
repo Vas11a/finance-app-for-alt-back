@@ -5,14 +5,20 @@ export default class MainService {
         return $api.post('clearHistory', { userId })
     }
 
-    static async removeOneHistoryElem(userId:number, data:any): Promise<any> {
-        return $api.post('removeOneHistoryElem', { userId, data })
+    static async removeOneHistoryElem(userId:number, idx:number): Promise<any> {
+        console.log({ userId, index: idx });
+        
+        return $api.post('removeOneHistoryElem', { userId, index: idx })
     }
 
     static async addElemToHistory(data: any, userId: number): Promise<any> {
-        return $api.post('addToHistory', { data, userId })
+        let sendData = JSON.parse(JSON.stringify(data))
+        sendData.id = userId
+        console.log(sendData);
+        return $api.post('addToHistory', sendData)
     }
-    static async updateCalendar(calendar: any, userId: number) : Promise<any> {
-        return $api.post('updateCalendar', { calendar, userId })
+    static async updateCalendar(calendar: any, userId: number) : Promise<any> {;
+        
+        return $api.post('updateCalendar', { calendar, id:+userId })
     }
 }

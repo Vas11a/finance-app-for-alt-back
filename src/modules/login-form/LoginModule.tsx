@@ -46,8 +46,8 @@ function LoginModule({ isLoginPage }: { isLoginPage?: boolean }): JSX.Element {
                 password: res.data.password
             }))
             dispatch(setCalendar(res.data.calendar))
-            dispatch(setOtherState([res.data.globalTotal, res.data.weekTotal, res.data.isMonthly]))
-            // dispatch(setHistory(res.data.userHistory))
+            dispatch(setOtherState([res.data.globalTotal, res.data.weekTotal]))
+            dispatch(setHistory(res.data.userHistory))
             localStorage.setItem('token', res.data._id);
             navigate('/user-pannel')
             setEmailLocal('');

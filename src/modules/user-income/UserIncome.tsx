@@ -9,7 +9,7 @@ import MemoSave from './parts/Save'
 import { CategoryScale } from "chart.js";
 import { useAppSelector, useAppDispatch } from 'hooks'
 import { addHistory } from '@slices/userHistorySlice'
-import { setIndicator } from '@slices/userPageSlice'
+import { setCalendar } from '@slices/userPageSlice'
 import MainService from '@service/MainService'
 import { setHistoryObj } from './helpers'
 Chart.register(CategoryScale);
@@ -33,11 +33,10 @@ export default function UserIncome({ setIsLoading, setErrorText, setIsError }: U
       console.log(indicate);
       console.log(globalTotal);
 
-      if (indicate) {
+      if (indicate) {        
         saveCurrentData();
       }
     } else {
-      // Логика, которая должна выполниться при монтировании
       setMounted(true);
     }
   }, [globalTotal]);
@@ -54,10 +53,11 @@ export default function UserIncome({ setIsLoading, setErrorText, setIsError }: U
     setIsLoading(true)
     setIsError(false)
     try {
-      console.log({ calendar: calendar, userId: userId });
+      // console.log({ calendar: calendar, userId: userId });
       
       const res = await MainService.updateCalendar(calendar, userId)
       console.log(res.data)
+      dispatch(setCalendar(res.data.calendar))
       setIsError(false)
     } catch (error) {
       setErrorText('Server error')
@@ -73,7 +73,7 @@ export default function UserIncome({ setIsLoading, setErrorText, setIsError }: U
     setIsError(false)
     try {
       const res = await MainService.addElemToHistory(resFc, userId)
-      dispatch(addHistory(res))
+      dispatch(addHistory(resFc))
     } catch (error) {
       setErrorText('Server error')
       setIsError(true)
@@ -112,4 +112,4 @@ export default function UserIncome({ setIsLoading, setErrorText, setIsError }: U
 
 
 
-
+// bizarreelectronics.com

@@ -9,6 +9,7 @@ type SwitchType =  {
 
 function Switch({isMonthly}: SwitchType): JSX.Element {
 
+    
     const dispatch = useAppDispatch()
     return (
         <div className={s.switchCont}>
