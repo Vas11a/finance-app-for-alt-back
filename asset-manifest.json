@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/finance-app-for-alt-back/static/css/main.76726d23.css",
-    "main.js": "/finance-app-for-alt-back/static/js/main.0099f549.js",
+    "main.css": "/finance-app-for-alt-back/static/css/main.d07bf708.css",
+    "main.js": "/finance-app-for-alt-back/static/js/main.5295cfa0.js",
     "static/media/add.png": "/finance-app-for-alt-back/static/media/add.273d075ee44f03dcd4cb.png",
     "static/media/cross.png": "/finance-app-for-alt-back/static/media/cross.c1001b5951547dfaf367.png",
     "static/media/arrow.png": "/finance-app-for-alt-back/static/media/arrow.082ae795a3b578ad1ca3.png",
@@ -10,11 +10,11 @@
     "static/media/eye-no-visib.svg": "/finance-app-for-alt-back/static/media/eye-no-visib.9f33f23d513c0870d410cec4572fa156.svg",
     "static/media/eye-visib.svg": "/finance-app-for-alt-back/static/media/eye-visib.ced0d3179f1c28f92d1d21bd26782446.svg",
     "index.html": "/finance-app-for-alt-back/index.html",
-    "main.76726d23.css.map": "/finance-app-for-alt-back/static/css/main.76726d23.css.map",
-    "main.0099f549.js.map": "/finance-app-for-alt-back/static/js/main.0099f549.js.map"
+    "main.d07bf708.css.map": "/finance-app-for-alt-back/static/css/main.d07bf708.css.map",
+    "main.5295cfa0.js.map": "/finance-app-for-alt-back/static/js/main.5295cfa0.js.map"
   },
   "entrypoints": [
-    "static/css/main.76726d23.css",
-    "static/js/main.0099f549.js"
+    "static/css/main.d07bf708.css",
+    "static/js/main.5295cfa0.js"
   ]
 }
