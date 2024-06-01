@@ -12,6 +12,7 @@ import { addHistory } from '@slices/userHistorySlice'
 import { setCalendar } from '@slices/userPageSlice'
 import MainService from '@service/MainService'
 import { setHistoryObj } from './helpers'
+import axios from 'axios'
 Chart.register(CategoryScale);
 
 type UserIncomeType = {
@@ -33,13 +34,17 @@ export default function UserIncome({ setIsLoading, setErrorText, setIsError }: U
       console.log(indicate);
       console.log(globalTotal);
 
-      if (indicate) {        
+      if (indicate) {
         saveCurrentData();
       }
     } else {
       setMounted(true);
     }
   }, [globalTotal]);
+
+  React.useEffect(() => {
+    getRate()
+  }, [])
 
   // React.useEffect(() => {
   //   console.log(indicate);
@@ -54,7 +59,7 @@ export default function UserIncome({ setIsLoading, setErrorText, setIsError }: U
     setIsError(false)
     try {
       // console.log({ calendar: calendar, userId: userId });
-      
+
       const res = await MainService.updateCalendar(calendar, userId)
       console.log(res.data)
       dispatch(setCalendar(res.data.calendar))
@@ -82,8 +87,33 @@ export default function UserIncome({ setIsLoading, setErrorText, setIsError }: U
     }
   }
 
+  const [rate, setRate] = React.useState()
+  const [rateLoading, setRateLoading] = React.useState(false)
+  const getRate = async () => {
+    try {
+      setRateLoading(true)
+      const response = await axios.get('https://api.api-ninjas.com/v1/exchangerate?pair=GBP_AUD', {
+        headers: {
+          'X-Api-Key': 'Clh48cu+zMIJJZgUjsRWDA==tr94SLAlMqIWMBQu',
+          'Content-Type': 'application/json'
+        }
+      });
+      console.log(response);
+      setRate(response.data.exchange_rate)
+
+    } catch (error) {
+      alert('Error get rate')
+    } finally {
+      setRateLoading(false)
+    }
+  }
+
   return (
     <div className='h-full'>
+      <div className='flex justify-between flex-wrap'>
+        <div className='text-2xl font-semibold'>Exchange Rate(GBP to AUD):</div>
+        {rateLoading ? <div className='text-2xl text-red-500 font-bold'>Loading...</div> : <div className='text-2xl text-red-500 font-bold'>{rate}</div>}
+      </div>
       <Date
         activeDay={calendar[activeDay]}
         activeIdx={activeDay}
